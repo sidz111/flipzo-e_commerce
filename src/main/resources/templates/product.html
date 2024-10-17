@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <section>
+        <div class="container-fluid bg-dark p-4 mt-5">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form action="/products" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-0 shadow-sm p-2" name="ch"
+                                   placeholder="Search products..." style="border-radius: 30px 0 0 30px; height: 45px;">
+                            <button class="btn text-white shadow-sm col-md-2" 
+                                    style="background: linear-gradient(45deg, #ff6b6b, #f06595); border-radius: 0 30px 30px 0; height: 45px;">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Sidebar -->
+        <div class="container-fluid mt-1">
+            <div class="row">
+                <div class="col-md-2 p-0">
+                    <div class="card shadow-sm mb-5 bg-warning rounded">
+                        <div class="card-body">
+                            <div class="list-group">
+                                <p class="fs-5">Category</p>
+                                <a href="/products"
+                                   th:classappend="${paramValue==''} ? 'active':''"
+                                   class="list-group-item list-group-item-primary"
+                                   aria-current="true"> All </a>
+                                <a th:each="c:${categories}"
+                                   th:href="@{'/products?category='+${c.name}}"
+                                   th:classappend="${paramValue == c.name} ? 'active':''"
+                                   class="list-group-item list-group-item-warning">[[${c.name}]]</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div class="col-md-10">
+                    <div class="card">
+                        <div class="card-body bg-secondary rounded">
+                            <p class="fs-3 text-center text-light">Products</p>
+                            <div class="row">
+                                <th:block th:if="${productsSize >0}">
+                                    <div class="col-md-3 mt-2" th:each="p:${products}">
+                                        <div class="card shadow-sm mb-4 bg-light" style="border-radius: 15px;">
+                                            <div class="card-body text-center">
+                                                <img alt="" th:src="@{'/img/product_img/'+${p.image}}"
+                                                     width="150px" height="150px" style="border-radius: 10px; object-fit: cover;">
+                                                <p class="fs-5 mt-2">[[${p.title}]]</p>
+                                                <div class="row text-center">
+                                                    <p class="fs-6 fw-bold">
+                                                        <span>&#8377; [[${p.discountPrice}]]</span><br>
+                                                        <span class="text-decoration-line-through text-secondary">&#8377; [[${p.price}]]</span>
+                                                        <span class="fs-6 text-success">[[${p.discount}]]% off</span>
+                                                    </p>
+                                                    <a th:href="@{'/product/'+${p.id}}"
+                                                       class="btn btn-warning col-md-6 offset-md-3">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:unless="${productsSize>0}">
+                                    <p class="fs-4 text-center mt-4 text-danger">Product not available</p>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <p class="text-light">Total Products: [[${totalElements}]]</p>
+                        </div>
+                        <div class="col-md-6">
+                            <th:block th:if="${productsSize>0}">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item" th:classappend="${isFirst} ? 'disabled':''">
+                                            <a class="page-link" th:href="@{'/products?pageNo='+${pageNo-1}}"
+                                               aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li th:each="i:${#numbers.sequence(1,totalPages)}"
+                                            class="page-item" th:classappend="${pageNo+1==i}?'active':''">
+                                            <a class="page-link" th:href="@{'/products?pageNo='+${i-1}}">[[${i}]]</a>
+                                        </li>
+                                        <li class="page-item" th:classappend="${isLast} ? 'disabled':''">
+                                            <a class="page-link" th:href="@{'/products?pageNo='+${pageNo+1}}"
+                                               aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>

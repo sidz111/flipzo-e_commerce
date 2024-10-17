@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::section})}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+</head>
+<body>
+	<section>
+		
+		<div class="container-fluid bg-dark p-4 mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form action="/products" method="get">
+                <div class="input-group">
+                    <!-- Reduced height and padding for search box -->
+                    <input type="text" class="form-control border-0 shadow-sm p-2" name="ch" 
+                           placeholder="Search products..." style="border-radius: 30px 0 0 30px; height: 45px;">
+                    
+                    <!-- Reduced height for the button -->
+                    <button class="btn text-white shadow-sm col-md-2" style="background: linear-gradient(45deg, #ff6b6b, #f06595); border-radius: 0 30px 30px 0; height: 45px;">
+                        <i class="fa-solid fa-magnifying-glass"></i> Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+		
+
+		<!--< Start Category Module -->
+		
+		<div class="container mt-5">
+    <div class="row">
+        <p class="text-center fs-4 mb-4 text-white">Categories</p>
+        <div class="col-md-2" th:each="c:${category}">
+            <div class="card shadow-sm mb-4 bg-light border-0 rounded" style="transition: transform 0.3s; cursor: pointer;">
+                <div class="card-body text-center">
+                    <img th:src="@{'img/category_img/'+${c.imageName}}" class="img-fluid" style="height: 170px; object-fit: cover;" alt="Category Image"><br>
+                    <a th:href="@{'/products?category='+${c.name}}" class="text-decoration-none text-primary fw-bold mt-2" style="font-size: 1.2rem;">[[${c.name}]]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+		<!-- End Category Module -->
+
+
+		<!-- Start Latest Product Module -->
+
+		<div class="container-fluid bg-secondary p-4 mt-5">
+    <div class="row">
+        <p class="text-center fs-4 mb-4 text-white">Latest Products</p>
+
+        <div class="col-md-3" th:each="p:${products}">
+            <div class="card shadow-sm mb-4 bg-light border-0 rounded" style="transition: transform 0.3s; cursor: pointer; border-radius: 15px;">
+                <div class="card-body text-center" style="padding: 20px;">
+                    <img alt="" th:src="@{'img/product_img/'+${p.image}}" class="img-fluid" style="height: 140px; object-fit: cover; border-radius: 10px;">
+                    <p class="mt-2"><a th:href="@{'/product/'+${p.id}}" class="text-decoration-none text-primary fw-bold" style="font-size: 1.1rem;">[[${p.title}]]</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+		<!-- End Latest Product Module -->
+	</section>
+</body>
+</html>
