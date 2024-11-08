@@ -34,6 +34,17 @@ Flipzo is a Spring Boot-based e-commerce web application that enables users to b
    - **Order Management**: Admin can manage all orders, update statuses, and view order history.
    - **User Management**: Admin has access to manage user details and roles.
 
+![Screenshot (270)](https://github.com/user-attachments/assets/f2999af2-725a-49e2-b943-63e8e105092e)
+![Screenshot (271)](https://github.com/user-attachments/assets/1ce6195c-084f-4f70-835f-ef62e2e1414a)
+![Screenshot (272)](https://github.com/user-attachments/assets/aa773523-fe1a-4385-994d-1813c2b36985)
+![Screenshot (266)](https://github.com/user-attachments/assets/c59ddadc-80a8-4d83-bedc-0655d31129de)
+![Screenshot (267)](https://github.com/user-attachments/assets/8ef68d26-b0f5-416d-8f19-f1cd78f27697)
+![Screenshot (268)](https://github.com/user-attachments/assets/dd9343e6-550e-48ad-bd88-3de3c67db887)
+![Screenshot (269)](https://github.com/user-attachments/assets/cb52aa41-fd45-4d8c-b744-40b212b027e0)
+
+
+     
+
 ## Technologies Used
 
 - **Backend**: Spring Boot, Spring MVC, Spring Security, Spring Data JPA
@@ -42,8 +53,3 @@ Flipzo is a Spring Boot-based e-commerce web application that enables users to b
 - **Tools**: Maven, Git
 - **Others**: Jakarta Servlet API, Java Mail API for sending notifications
 
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/sidz111/Flipzo
